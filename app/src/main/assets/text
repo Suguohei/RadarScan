@@ -1,0 +1,23 @@
+CAM[2]:gc0310_mipi_yuv; CAM[0]:imx214_mipi_raw;
+
+CAM_Info[0]:imx214_mipi_raw;
+Pre: TgGrab_w,h,x_,y= 2104, 1560,  0,  0, delay_frm= 3
+Cap: TgGrab_w,h,x_,y= 4208, 3120,  0,  0, delay_frm= 3
+Vid: TgGrab_w,h,x_,y= 4208, 3120,  0,  0, delay_frm= 3
+HSV: TgGrab_w,h,x_,y= 2104, 1184,  0,  0, delay_frm= 3
+SLV: TgGrab_w,h,x_,y= 2104, 1184,  0,  0, delay_frm= 3
+Seninf_Type(0:parallel,1:mipi,2:serial)=1, output_format(0:B,1:Gb,2:Gr,3:R)= 0
+Driving_Current(0:2mA,1:4mA,2:6mA,3:8mA)=0, mclk_freq=24, mipi_lane=4
+PDAF_Support(0:No PD,1:PD RAW,2:VC(Full),3:VC(Bin),4:Dual Raw,5:Dual VC= 0
+HDR_Support(0:NO HDR,1: iHDR,2:mvHDR,3:zHDR)= 0 CAM[1]:gc5025s_mipi_raw;
+
+CAM_Info[1]:gc5025s_mipi_raw;
+Pre: TgGrab_w,h,x_,y= 2592, 1944,  0,  0, delay_frm= 2
+Cap: TgGrab_w,h,x_,y= 2592, 1944,  0,  0, delay_frm= 2
+Vid: TgGrab_w,h,x_,y= 2592, 1944,  0,  0, delay_frm= 2
+HSV: TgGrab_w,h,x_,y= 2592, 1944,  0,  0, delay_frm= 2
+SLV: TgGrab_w,h,x_,y= 2592, 1944,  0,  0, delay_frm= 2
+Seninf_Type(0:parallel,1:mipi,2:serial)=1, output_format(0:B,1:Gb,2:Gr,3:R)= 3
+Driving_Current(0:2mA,1:4mA,2:6mA,3:8mA)=2, mclk_freq=24, mipi_lane=2
+PDAF_Support(0:No PD,1:PD RAW,2:VC(Full),3:VC(Bin),4:Dual Raw,5:Dual VC= 0
+HDR_Support(0:NO HDR,1: iHDR,2:mvHDR,3:zHDR)= 0
