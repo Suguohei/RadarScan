@@ -6,12 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.example.suguoqing.radarscan.custom.RadarView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/lkd"
-        android:fitsSystemWindows="true"
-        />
+  <com.example.suguoqing.radarscan.custom.RadarViewGroup
+      android:id="@+id/radarViewGroup"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@drawable/lkd">
+
+      <com.example.suguoqing.radarscan.custom.RadarView
+          android:id="@+id/Radar_scan"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          />
+  </com.example.suguoqing.radarscan.custom.RadarViewGroup>
 
 
 </android.support.constraint.ConstraintLayout>

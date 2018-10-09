@@ -1,5 +1,5 @@
 package com.example.suguoqing.radarscan.been;
 
-enum Gender {
+public enum Gender {
     男,女
 }
