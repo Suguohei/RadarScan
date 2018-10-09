@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
     }
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         radarViewGroup.setInfoList(infoList);
+        radarViewGroup.setCurrentShowItem(0);
     }
 
 }

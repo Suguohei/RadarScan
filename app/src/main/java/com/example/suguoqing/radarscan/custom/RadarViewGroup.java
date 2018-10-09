@@ -1,5 +1,6 @@
 package com.example.suguoqing.radarscan.custom;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -20,6 +21,7 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
     private int minItemPostion;//最小的距离的item所在的位置,也就是在infolist中的第几个是最小的距离
     private CircleView currentCircleView;//当前的item,我们需要将他的头像变大
     private CircleView minItem;//距离最小的item
+    private IRadarClickListen radarClickListen;
 
 
     public RadarViewGroup(Context context) { 
@@ -73,7 +75,7 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
             Log.d(TAG, "onLayout: view"+view.getMeasuredWidth()+"--"+view.getMeasuredHeight());
         }
         for(int i = 0;i < childCount;i++){
-            View child = getChildAt(i);
+            final View child = getChildAt(i);
             if(child.getId() == R.id.Radar_scan){
                 continue;
                 //如果不是circleView那么就跳过
@@ -92,8 +94,7 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
             /*((CircleView) child).setDisX(((CircleView)child).getX());
             ((CircleView) child).setDisY(((CircleView)child).getY());*/
 
-            Log.d(TAG, "onLayout: zzzzzzz"+childCount+"----"+dataLength);
-            int temp = i-1<0?i:i-1;
+            final int temp = i-1<0?i:i-1;
             ((CircleView)child).setDisX((float) Math.cos(Math.toRadians(scanAngleList.get(temp)))
                     *((CircleView)child).getProportion() * mWidth / 2);
 
@@ -114,6 +115,18 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
 
             //设置监听
 
+            child.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //先还原当前item大小
+                    resetAnim(currentCircleView);
+                    currentCircleView = (CircleView)child;
+                    startAnim(currentCircleView,temp);
+                    if(radarClickListen != null){
+                        radarClickListen.onRadarItemClick(temp);
+                    }
+                }
+            });
         }
 
     }
@@ -172,8 +185,6 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
             scanAngleList.put(i,0f);
         }*/
 
-
-
         for(int j = 0;j<dataLength;j++){
             scanAngleList.put(j,0f);
             CircleView circleView = new CircleView(getContext());
@@ -199,7 +210,38 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
 
     }
 
+    public void setRadarClickListen(IRadarClickListen listen){
+        radarClickListen = listen;
+    }
 
+    public interface IRadarClickListen {
+        void onRadarItemClick(int postion);
+    }
+
+
+    private void resetAnim(CircleView object) {
+        if (object != null) {
+            ObjectAnimator.ofFloat(object, "scaleX", 1f).setDuration(300).start();
+            ObjectAnimator.ofFloat(object, "scaleY", 1f).setDuration(300).start();
+        }
+
+    }
+
+
+    private void startAnim(CircleView object, int position) {
+        if (object != null) {
+            ObjectAnimator.ofFloat(object, "scaleX", 2f).setDuration(300).start();
+            ObjectAnimator.ofFloat(object, "scaleY", 2f).setDuration(300).start();
+        }
+    }
+
+
+    public void setCurrentShowItem(int position) {
+        CircleView child = (CircleView) getChildAt(position + 1);
+        resetAnim(currentCircleView);
+        currentCircleView = child;
+        startAnim(currentCircleView, position);
+    }
 
 
 }
