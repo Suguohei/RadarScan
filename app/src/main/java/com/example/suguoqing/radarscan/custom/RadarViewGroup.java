@@ -144,7 +144,9 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
 
     @Override
     public void onSuccess() {
+        resetAnim(currentCircleView);
         currentCircleView = minItem;
+        startAnim(currentCircleView, minItemPostion);
     }
 
     public int MeasureSize(int measureSpec){
@@ -167,9 +169,9 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
     public void setInfoList(SparseArray<Info> infoList) {
         this.infoList = infoList;
         dataLength = infoList.size();
-        /*float min = Float.MIN_VALUE;
-        float max = Float.MAX_VALUE;*/
-      /*  //找到距离的最大值,最小值是minItemPostion
+        float min = Float.MIN_VALUE;
+        float max = Float.MAX_VALUE;
+        //找到距离的最大值,最小值是minItemPostion
         for(int i = 0;i<dataLength;i++){
             Info info = infoList.get(i);
             if(info.getDistance() < min){
@@ -183,10 +185,10 @@ public class RadarViewGroup extends ViewGroup implements RadarView.IScannerListe
             }
             //设置item的初始化角度,都是0,
             scanAngleList.put(i,0f);
-        }*/
+        }
 
         for(int j = 0;j<dataLength;j++){
-            scanAngleList.put(j,0f);
+
             CircleView circleView = new CircleView(getContext());
             //判断男女,如果男就蓝色,如果女就是红色
             if(infoList.get(j).getGender() == Gender.男){
